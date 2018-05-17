@@ -18,11 +18,15 @@ export const store = (function(){
 
     const synch = function(){
         api.getBookMarks(function(arr){
-            store.bookmarks = arr
+            store.bookmarks = arr;
             ui.render()
         })
     };
 
+    const toggleDetail = function(id){
+        store.findItem(id).detail = !store.findItem(id).detail;
+        ui.render()
+    }
 
     return {
         bookmarks: [],
@@ -32,6 +36,7 @@ export const store = (function(){
         addItem,
         findItem,
         synch,
+        toggleDetail,
     }
 
 }())

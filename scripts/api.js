@@ -33,6 +33,19 @@ export const api = (function(){
         })
     };
 
+    const delMultiple = function(arr, callback){
+        let count = 0;
+        console.log(arr.length)
+        arr.forEach(function(id){
+            api.delBookMark(id, function(){
+                count += 1;
+                console.log(count)
+                if(count >= arr.length){callback()}
+            })
+        })
+        
+    };
+
     const update = function(id,newValObj, callback){
         const newData = JSON.stringify(newValObj);
         $.ajax({
@@ -49,7 +62,9 @@ export const api = (function(){
         getBookMarks,
         addBookMark,
         delBookMark,
+        delMultiple,
         update,
+
     }
 
 }())

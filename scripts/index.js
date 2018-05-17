@@ -12,6 +12,9 @@ $(
 
     listener.newItemForm(),
     listener.newClicked(),
+    listener.delClicked(),
+    listener.bookMarkClicked(),
+    listener.editClicked(),
     store.synch(),
     
 
