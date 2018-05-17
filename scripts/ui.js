@@ -25,19 +25,22 @@ export const ui = (function(){
         let details = '';
         let title = obj.title;
         let editButton = '';
+        let submitButton = '';
 
         if(obj.detail === true){
             let url = `<a href="${obj.url}">${obj.url}</a>`;
             let description = `<span class= "description">${obj.desc}</span>`;
             
             if(obj.editing === true){
-                title = `<input id="edit-name-${obj.id}" type= "text">`
-
+                title = `<input class="book-input edit-name" id="edit-name-${obj.id}" type= "text">`;
+                url = `<input class="book-input edit-url" id="edit-url-${obj.id}" type= "text">`;
+                description = `<input class="book-input edit-desc" id="edit-desc-${obj.id}" type= "text">`;
+                submitButton = `<button class="hidden book-input submit-edit">t Bookmark</button>`
             };
            
 
             details = `
-            <div>   ${url}  ${description}
+            <div>   ${url}  ${description} ${submitButton}
             
             </div>`
             editButton = `<button class="book-input edit-button">Edit Bookmark</button>`
@@ -45,7 +48,7 @@ export const ui = (function(){
         
         return `
         <div id="${obj.id}" class="bookmark">
-            <form>${title}
+            <form id="edit-item-form" value="${obj.id}">${title}
             
             ${details}
             </form>

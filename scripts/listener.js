@@ -73,12 +73,27 @@ export const listener = (function(){
         $('.bookmark-list').on('click', '.edit-button', function(event){
             event.preventDefault();
             const id = $(event.currentTarget).closest('.bookmark').attr('id');
-            console.log(id)
-            store.findItem(id).editing = true;
-            ui.render()
-            console.log($(`#edit-name-${id}`))
-            $(`#edit-name-${id}`).val('testing')    
+            const item = store.findItem(id);
+            item.editing = true;
+            ui.render();
+            console.log($(`#edit-name-${id}`));
+            $(`#edit-name-${id}`).val(item.title);
+            $(`#edit-url-${id}`).val(item.url)
+            $(`#edit-desc-${id}`).val(item.desc)        
         })
+    };
+
+    const editSubmitted = function(){
+        $('.bookmark-list').on('submit', '#edit-item-form', function(event){
+            event.preventDefault();
+            const id = $(event.currentTarget).parent().attr('id');
+            console.log(id)
+            const title = $(event.currentTarget).find('.edit-name').val();
+            const url = $(event.currentTarget).find('.edit-url').val();
+            const desc = $(event.currentTarget).find('.edit-desc').val();
+            api.update(id,{title:title,url:url,desc:desc},store.synch);
+
+        })      
     };
 
     return {
@@ -88,6 +103,7 @@ export const listener = (function(){
         delClicked,
         bookMarkClicked,
         editClicked,
+        editSubmitted,
     }
     
 }())

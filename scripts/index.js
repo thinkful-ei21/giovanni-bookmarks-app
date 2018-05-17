@@ -15,6 +15,7 @@ $(
     listener.delClicked(),
     listener.bookMarkClicked(),
     listener.editClicked(),
+    listener.editSubmitted(),
     store.synch(),
     
 
