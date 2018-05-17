@@ -6,12 +6,12 @@ import {ui} from './ui.js';
 export const listener = (function(){
 
     const newItemForm = function(){
-        $('.bookMark_list').on('submit', '#new_item_form', function(event){
+        $('.bookmark-list').on('submit', '#new-item-form', function(event){
             event.preventDefault();
-            const title = $(event.currentTarget).find('.bookmark_title_input').val();
-            const url = $(event.currentTarget).find('.bookmark_url_input').val();
-            const description = $(event.currentTarget).find('.bookmark_description_input').val();
-           
+            const title = $(event.currentTarget).find('.bookmark-title-input').val();
+            const url = $(event.currentTarget).find('.bookmark-url-input').val();
+            const description = $(event.currentTarget).find('.bookmark-description-input').val();
+  
             api.addBookMark({
                 title: title,
                 url : url,
@@ -27,7 +27,7 @@ export const listener = (function(){
     }
 
     const newClicked = function(){
-        $('.commands').on('click', '.New_BookMark', function(){
+        $('.page-commands').on('click', '.new-bookmark', function(){
             store.pageState = 'add item';
             ui.render()
             listener.outsideClicked()
@@ -35,9 +35,10 @@ export const listener = (function(){
     };
 
     const delClicked = function(){
-        $('.commands').on('click', '.Delete_Selected', function(){
+        $('.page-commands').on('click', '.delete-selected', function(){
+            console.log('delete fired')
             const toDelete = []
-            $('.bookMark_list').find('.checkbox').filter(':checked').each(function(index){
+            $('.bookmark-list').find('.checkbox').filter(':checked').each(function(index){
                 toDelete.push($(this).val())
             })
             
@@ -49,7 +50,7 @@ export const listener = (function(){
         let outClick = 0
         const revert = function(event){
             outClick +=1;
-            if(store.pageState = 'add item' && outClick >1 && !$(event.target).hasClass('add_item')){
+            if(store.pageState = 'add item' && outClick >1 && !$(event.target).hasClass('add-item')){
                 store.pageState = 'display'
                 ui.render()
                 $('html').off('click', revert)        
@@ -59,9 +60,9 @@ export const listener = (function(){
     };
 
     const bookMarkClicked = function(){
-        $('.bookMark_list').on('click', '.bookMark', function(event){
-        //    console.log($(event.target).hasClass('book_command'))
-            if(!$(event.target).hasClass('book_input')){
+        $('.bookmark-list').on('click', '.bookmark', function(event){
+        //    console.log($(event.target).hasClass('book-command'))
+            if(!$(event.target).hasClass('book-input')){
                 store.findItem($(event.currentTarget).attr('id')).editing = false;
                 store.toggleDetail($(event.currentTarget).attr('id'))   
             }
@@ -69,10 +70,14 @@ export const listener = (function(){
     };
 
     const editClicked = function(){
-        $('.bookMark_list').on('click', '.edit_button', function(event){
-            const id = $(event.currentTarget).parent().attr('id');
+        $('.bookmark-list').on('click', '.edit-button', function(event){
+            event.preventDefault();
+            const id = $(event.currentTarget).closest('.bookmark').attr('id');
+            console.log(id)
             store.findItem(id).editing = true;
-            ui.render()           
+            ui.render()
+            console.log($(`#edit-name-${id}`))
+            $(`#edit-name-${id}`).val('testing')    
         })
     };
 
