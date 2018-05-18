@@ -37,6 +37,10 @@ form {
     padding: 5px;
 }
 
+.new-item-form * {
+    margin-left: auto;
+    margin-right: auto;
+}
 
 .star {
     background: white;
@@ -58,6 +62,11 @@ form {
     width: 25px;
 }
 
+.add-item {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 .edit-button{
     float: right;
 }

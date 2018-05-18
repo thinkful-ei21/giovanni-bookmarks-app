@@ -9,11 +9,11 @@ export const ui = (function(){
     const formatPrompt = function(){
         return `
         <div class="add-item">
-            <form id="new-item-form">
+            <form class="new-item-form" id="new-item-form">
                 <label class= "add-item hidden" for="new-item-form">New Bookmark</label>
-                <input type="text" name="bookmark-title" class="add-item bookmark-title-input" placeholder="bookmark title">
-                <input type="text" name="bookmark-url" class="add-item bookmark-url-input" placeholder="bookmark url">
-                <input type="text" name="bookmark-description" class="add-item bookmark-description-input" placeholder="bookmark description">
+                <input type="text" name="bookmark-title" class="add-item bookmark-title-input" placeholder="bookmark title"><a class="error nameError"></a>
+                <input type="text" name="bookmark-url" class="add-item bookmark-url-input" placeholder="bookmark url"><a class="error urlError"></a>
+                <input type="text" name="bookmark-description" class="add-item bookmark-description-input" placeholder="bookmark description"><a class="error descError"></a>
                 <button class= "add-item" type="submit">Add item</button>
             </form>
         </div>      

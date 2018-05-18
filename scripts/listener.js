@@ -15,17 +15,21 @@ export const listener = (function(){
             const onErr = function(error){
                 $(event.currentTarget).after(`error: ${api.parseErr(error)}`)};
 
-            api.addBookMark({
-                title: title,
-                url : url,
-                desc: description,
-                rating: 4,
-                detail: false,
-                editing: false,
-            }, store.synch, onErr);
-            $('html').off('click')  
-            store.pageState = 'display'
-     
+            if(title.length < 1){$(event.currentTarget).find('.nameError').html('Name must be at least one character long')}          
+            else if(url.slice(0,7) !== 'http://'){$(event.currentTarget).find('.urlError').html('Url must begin with http://')}          
+            else if(title.length < 1){$(event.currentTarget).find('.descError').html('Description must be at least one character long')}          
+            else {
+                api.addBookMark({
+                    title: title,
+                    url : url,
+                    desc: description,
+                    rating: 4,
+                    detail: false,
+                    editing: false,
+                }, store.synch, onErr);
+                $('html').off('click')  
+                store.pageState = 'display'
+            }
         })
     }
 
