@@ -54,7 +54,7 @@ export const ui = (function(){
 
         return `
         <li id="${obj.id}" class="bookmark ${hide}" tabindex="0">
-            <form id="edit-item-form" value="${obj.id}">
+            <form id="edit-item-form-${obj.id}" class="edit-item-form" value="${obj.id}">
             ${title}
             ${details}
             </form>
@@ -66,7 +66,8 @@ export const ui = (function(){
                 <button class="book-input star star-4" value=4>${stars['s4']}</button>
                 <button class="book-input star star-5" value=5>${stars['s5']}</button>
             </div>
-            <input type="checkbox" name="select bookmark" class="book-input checkbox" value="${obj.id}">
+            <label for="select-bookmark-${obj.id}">select:</label>
+            <input type="checkbox" id="select-bookmark-${obj.id}" name="select-bookmark-${obj.id}" class="book-input checkbox" value="${obj.id}">
         </li>  `
 
     };

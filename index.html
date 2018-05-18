@@ -8,20 +8,19 @@
     <link rel="stylesheet" href="styles/index.css">
     <title>MY BOOKMARKS</title>
 </head>
-<body>
+<body role="main">
     <h1>MY Bookmarks</h1>
     <div class="page-commands">
         <button class="page-command new-bookmark">New BookMark</button>
         <button class="page-command delete-selected">Delete Selected</button>
-        <select class="page-command min-stars">
-            <option value=1>minimum ★</option>
+        <label for="minimum-star-filter" >Minimum stars:</label>
+        <select name="minimum-star-filter" id="minimum-star-filter" class="page-command min-stars">
+            <option value=1>★</option>
             <option value=2>★ ★</option>
             <option value=3>★ ★ ★</option>
             <option value=4>★ ★ ★ ★</option>
             <option value=5>★ ★ ★ ★ ★</option>
             
-            
-            <a>☆</a>
           </select>
     </div>
 

@@ -86,7 +86,7 @@ export const listener = (function(){
     };
 
     const editSubmitted = function(){
-        $('.bookmark-list').on('submit', '#edit-item-form', function(event){
+        $('.bookmark-list').on('submit', '.edit-item-form', function(event){
             event.preventDefault();
             const id = $(event.currentTarget).parent().attr('id');
             const title = $(event.currentTarget).find('.edit-name').val();
