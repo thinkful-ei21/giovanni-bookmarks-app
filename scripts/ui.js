@@ -28,33 +28,31 @@ export const ui = (function(){
         let submitButton = '';
 
         if(obj.detail === true){
-            let url = `<a href="${obj.url}">${obj.url}</a>`;
-            let description = `<span class= "description">${obj.desc}</span>`;
-            editButton = `<button class="book-input edit-button">Edit Bookmark</button>`
-
+            let url = `<a href="${obj.url}" class="details url">${obj.url}</a>`;
+            let description = `<a class= "details description">${obj.desc}</a>`;
+            
             if(obj.editing === true){
-                title = `
-                <label for="edit-item-form" class="hidden"l>Edit Bookmark</label>
-                <input class="book-input edit-name" id="edit-name-${obj.id}" type= "text">`;
-                url = `<input class="book-input edit-url" id="edit-url-${obj.id}" type= "text">`;
-                description = `<input class="book-input edit-desc" id="edit-desc-${obj.id}" type= "text">`;
+                title = `<label for="edit-item-form" class="hidden"l>Edit Bookmark</label>
+                <input class="book-input edit-name" id="edit-name-${obj.id}" type= "text"><a class="error nameError"></a>`;
+                url = `<input class="book-input edit-url" id="edit-url-${obj.id}" type= "text"><a class="error urlError"></a>`;
+                description = `<input class="book-input edit-desc" id="edit-desc-${obj.id}" type= "text"><a class="error descError"></a>`;
                 submitButton = `<button class="hidden book-input submit-edit">t Bookmark</button>`
                 editButton =''
             };           
-            details = `<div>   ${url}  ${description} ${submitButton} </div>`
 
+            editButton = `<button class="book-input edit-button">Edit Bookmark</button>`
+            details = `<div>   ${url}  ${description} ${submitButton} </div>`
         };
 
-        const stars = {s1:'☆',s2:'☆',s3:'☆',s4:'☆',s5:'☆',}
-        Object.keys(stars).forEach(function(s){
-            s[1] <= obj.rating ? stars[s] = '★':{};
-        });
+        const stars = {s1:'☆',s2:'☆',s3:'☆',s4:'☆',s5:'☆',};
+        Object.keys(stars).forEach(s =>  s[1] <= obj.rating ? stars[s] = '★':{});
         
         const hide = obj.rating >= store.minimumStars ? '' : "hidden"
 
         return `
         <li id="${obj.id}" class="bookmark ${hide}" tabindex="0">
             <form id="edit-item-form-${obj.id}" class="edit-item-form" value="${obj.id}">
+            <input type="checkbox" class"checkbox book-input" id="select-bookmark-${obj.id}" name="select-bookmark-${obj.id}" class="book-input checkbox" value="${obj.id}">
             ${title}
             ${details}
             </form>
@@ -66,8 +64,7 @@ export const ui = (function(){
                 <button class="book-input star star-4" value=4>${stars['s4']}</button>
                 <button class="book-input star star-5" value=5>${stars['s5']}</button>
             </div>
-            <label for="select-bookmark-${obj.id}">select:</label>
-            <input type="checkbox" id="select-bookmark-${obj.id}" name="select-bookmark-${obj.id}" class="book-input checkbox" value="${obj.id}">
+            <label for="select-bookmark-${obj.id}" class="visuallyhidden">select:</label>
         </li>  `
 
     };

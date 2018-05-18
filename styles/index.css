@@ -1,17 +1,83 @@
 
 .bookmark {
     display: block;
-    margin: 10px;
-    border: 2px solid black;
+    width: 90%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    border: 1px solid black;
+
+}
+ul {
+    padding:0px
+}
+.page-commands {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+h1 {
+    text-align: center
+}
+
+.page-command {
+    margin-left: auto;
+    margin-right: auto;
+    height: 20px;
+    padding: 0px;
 
 }
 
 input {
     display: block
-
 }
+
+form {
+    padding: 5px;
+}
+
+
+.star {
+    background: white;
+    border: none;
+    font-size: 20px;
+    padding: 0px;
+    margin-bottom: 5px;
+}
+
+.details {
+    display: block;
+}
+
+
+
+.checkbox{
+    float: right;
+    height: 25px;
+    width: 25px;
+}
+
+.edit-button{
+    float: right;
+}
+
+
 
 .hidden {
     display: none
 
+}
+
+/*vidually hidden taken from https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css#L130-L140*/
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap; /* 1 */
 }

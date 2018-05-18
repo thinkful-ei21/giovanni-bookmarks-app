@@ -94,8 +94,11 @@ export const listener = (function(){
             const desc = $(event.currentTarget).find('.edit-desc').val();
             const onErr = function(error){
                 $(event.currentTarget).after(`error: ${api.parseErr(error)}`)};
-
-            api.update(id,{title:title,url:url,desc:desc},store.synch, onErr);
+            
+            if(title.length < 1){$(event.currentTarget).find('.nameError').html('Name must be at least one character long')}          
+            else if(url.slice(0,7) !== 'http://'){$(event.currentTarget).find('.urlError').html('Url must begin with http://')}          
+            else if(title.length < 1){$(event.currentTarget).find('.descError').html('Description must be at least one character long')}          
+            else{api.update(id,{title:title,url:url,desc:desc},store.synch, onErr)}
 
         })      
     };
