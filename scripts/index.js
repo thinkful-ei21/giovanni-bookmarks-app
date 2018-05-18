@@ -12,9 +12,11 @@ $(
 
     listener.newItemForm(),
     listener.newClicked(),
+    listener.minRatingChanged(),
     listener.delClicked(),
     listener.bookMarkClicked(),
     listener.editClicked(),
+    listener.starClicked(),
     listener.editSubmitted(),
     store.synch(),
     

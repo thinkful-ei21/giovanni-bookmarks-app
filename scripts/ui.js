@@ -30,32 +30,42 @@ export const ui = (function(){
         if(obj.detail === true){
             let url = `<a href="${obj.url}">${obj.url}</a>`;
             let description = `<span class= "description">${obj.desc}</span>`;
-            
+            editButton = `<button class="book-input edit-button">Edit Bookmark</button>`
+
             if(obj.editing === true){
                 title = `<input class="book-input edit-name" id="edit-name-${obj.id}" type= "text">`;
                 url = `<input class="book-input edit-url" id="edit-url-${obj.id}" type= "text">`;
                 description = `<input class="book-input edit-desc" id="edit-desc-${obj.id}" type= "text">`;
                 submitButton = `<button class="hidden book-input submit-edit">t Bookmark</button>`
-            };
-           
+                editButton =''
+            };           
+            details = `<div>   ${url}  ${description} ${submitButton} </div>`
 
-            details = `
-            <div>   ${url}  ${description} ${submitButton}
-            
-            </div>`
-            editButton = `<button class="book-input edit-button">Edit Bookmark</button>`
-        }
+        };
+
+        const stars = {s1:'☆',s2:'☆',s3:'☆',s4:'☆',s5:'☆',}
+        Object.keys(stars).forEach(function(s){
+            s[1] <= obj.rating ? stars[s] = '★':{};
+        });
         
+        const hide = obj.rating >= store.minimumStars ? '' : "hidden"
+
         return `
-        <div id="${obj.id}" class="bookmark">
+        <li id="${obj.id}" class="bookmark ${hide}">
             <form id="edit-item-form" value="${obj.id}">${title}
             
             ${details}
             </form>
             ${editButton}
-            <div> stars go here </div>
+            <div class= "star-ratings" value="${obj.id}">
+                <button class="book-input star star-1" value=1 >${stars['s1']}</button>
+                <button class="book-input star star-2" value=2>${stars['s2']}</button>
+                <button class="book-input star star-3" value=3>${stars['s3']}</button>
+                <button class="book-input star star-4" value=4>${stars['s4']}</button>
+                <button class="book-input star star-5" value=5>${stars['s5']}</button>
+            </div>
             <input type="checkbox" name="select bookmark" class="book-input checkbox" value="${obj.id}">
-        </div>  `
+        </li>  `
 
     };
 

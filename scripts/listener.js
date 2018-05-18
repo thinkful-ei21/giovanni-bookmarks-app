@@ -10,13 +10,13 @@ export const listener = (function(){
             event.preventDefault();
             const title = $(event.currentTarget).find('.bookmark-title-input').val();
             const url = $(event.currentTarget).find('.bookmark-url-input').val();
-            const description = $(event.currentTarget).find('.bookmark-description-input').val();
+            const description = $(event.currentTarget).find('.bookmark-description-input').val()+' ';
   
             api.addBookMark({
                 title: title,
                 url : url,
                 desc: description,
-                rating: 5,
+                rating: 4,
                 detail: false,
                 editing: false,
             }, store.synch);
@@ -87,7 +87,6 @@ export const listener = (function(){
         $('.bookmark-list').on('submit', '#edit-item-form', function(event){
             event.preventDefault();
             const id = $(event.currentTarget).parent().attr('id');
-            console.log(id)
             const title = $(event.currentTarget).find('.edit-name').val();
             const url = $(event.currentTarget).find('.edit-url').val();
             const desc = $(event.currentTarget).find('.edit-desc').val();
@@ -96,13 +95,33 @@ export const listener = (function(){
         })      
     };
 
+    const starClicked = function(){
+        $('.bookmark-list').on('click', '.star', function(event){
+            const id = $(event.target).closest('.bookmark').attr('id');
+            const rating = $(event.target).val();
+            api.update(id,{rating:rating},store.synch);
+
+        })
+    };
+
+
+    const minRatingChanged = function(){
+        $('.min-stars').on('change',function(event){
+            store.minimumStars = $('.min-stars').val();
+            ui.render()
+        });
+    };
+
+
     return {
         newItemForm,
         newClicked,
+        minRatingChanged,
         outsideClicked,
         delClicked,
         bookMarkClicked,
         editClicked,
+        starClicked,
         editSubmitted,
     }
     
