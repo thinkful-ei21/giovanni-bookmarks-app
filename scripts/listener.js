@@ -11,7 +11,10 @@ export const listener = (function(){
             const title = $(event.currentTarget).find('.bookmark-title-input').val();
             const url = $(event.currentTarget).find('.bookmark-url-input').val();
             const description = $(event.currentTarget).find('.bookmark-description-input').val()+' ';
-  
+
+            const onErr = function(error){
+                $(event.currentTarget).after(`error: ${api.parseErr(error)}`)};
+
             api.addBookMark({
                 title: title,
                 url : url,
@@ -19,7 +22,7 @@ export const listener = (function(){
                 rating: 4,
                 detail: false,
                 editing: false,
-            }, store.synch);
+            }, store.synch, onErr);
             $('html').off('click')  
             store.pageState = 'display'
      
@@ -60,8 +63,7 @@ export const listener = (function(){
     };
 
     const bookMarkClicked = function(){
-        $('.bookmark-list').on('click', '.bookmark', function(event){
-        //    console.log($(event.target).hasClass('book-command'))
+        $('.bookmark-list').on('click keypress', '.bookmark', function(event){
             if(!$(event.target).hasClass('book-input')){
                 store.findItem($(event.currentTarget).attr('id')).editing = false;
                 store.toggleDetail($(event.currentTarget).attr('id'))   
@@ -90,7 +92,10 @@ export const listener = (function(){
             const title = $(event.currentTarget).find('.edit-name').val();
             const url = $(event.currentTarget).find('.edit-url').val();
             const desc = $(event.currentTarget).find('.edit-desc').val();
-            api.update(id,{title:title,url:url,desc:desc},store.synch);
+            const onErr = function(error){
+                $(event.currentTarget).after(`error: ${api.parseErr(error)}`)};
+
+            api.update(id,{title:title,url:url,desc:desc},store.synch, onErr);
 
         })      
     };
@@ -112,6 +117,14 @@ export const listener = (function(){
         });
     };
 
+    const escapeMenu = function(){
+        $(document).on('keydown',function(event){
+            if(store.pageState !== 'display' && event.keyCode == 27){
+                store.pageState = 'display';
+                ui.render()
+            }  
+        })        
+    };
 
     return {
         newItemForm,
@@ -123,6 +136,7 @@ export const listener = (function(){
         editClicked,
         starClicked,
         editSubmitted,
+        escapeMenu,
     }
     
 }())

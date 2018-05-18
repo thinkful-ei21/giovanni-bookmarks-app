@@ -18,18 +18,7 @@ $(
     listener.editClicked(),
     listener.starClicked(),
     listener.editSubmitted(),
+    listener.escapeMenu(),
     store.synch(),
     
-
-    // api.addBookMark(
-    //    {title:'testItem', url: 'http://www.google.com', desc: 'here is some text', rating: 4, selected: false},
-    //    api.getBookMarks(ui.render))
-    
-    // api.getBookMarks( function(response){
-    //     obj = response[0];
-    //     console.log(obj.id)
-    //     api.delBookMark(obj.id, console.log)
-    // })
-        
-
 )
